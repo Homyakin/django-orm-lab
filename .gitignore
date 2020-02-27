@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 .idea/
-database/docker/db_zakupki/
+database/docker/db_storage/
