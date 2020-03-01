@@ -12,7 +12,7 @@ Jinja2==2.11.1
 lazy-object-proxy==1.4.3
 MarkupSafe==1.1.1
 orator==0.9.9
-pastel==0.1.1
+pastel==0.2.0
 pendulum==1.5.1
 pyaml==16.12.2
 Pygments==2.5.2
