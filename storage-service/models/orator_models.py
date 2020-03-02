@@ -1,4 +1,4 @@
-from orator.orm import has_many, has_one
+from orator.orm import has_many, has_one, belongs_to
 
 from app import db
 
@@ -15,10 +15,11 @@ class Client(db.Model):
 
 class Contract(db.Model):
     __table__ = 'contract'
-    __fillable__ = ['number', 'end_date', 'client_id']
+    __fillable__ = ['end_date', 'client_id']
     __timestamps__ = False
+    __primary_key__ = 'number'
 
-    @has_one
+    @belongs_to
     def client(self):
         return Client
 
@@ -33,7 +34,7 @@ class Product(db.Model):
                     'max_temperature', 'min_humidity', 'max_humidity', 'contract_number']
     __timestamps__ = False
 
-    @has_one
+    @belongs_to
     def contract(self):
         return Contract
 
@@ -42,8 +43,9 @@ class Rack(db.Model):
     __table__ = 'client'
     __fillable__ = ['space_id', 'capacity', 'height', 'width', 'length', 'max_weight']
     __timestamps__ = False
+    __primary_key__ = 'number'
 
-    @has_one
+    @belongs_to
     def space(self):
         return Space
 
