@@ -9,7 +9,7 @@ class Client(db.Model):
     __timestamps__ = False
 
     @has_many
-    def contract(self):
+    def contracts(self):
         return Contract
 
 
@@ -24,23 +24,28 @@ class Contract(db.Model):
         return Client
 
     @has_many
-    def product(self):
+    def products(self):
         return Product
 
 
 class Product(db.Model):
     __table__ = 'product'
     __fillable__ = ['height', 'width', 'length', 'weight', 'date_of_receipt', 'min_temperature',
-                    'max_temperature', 'min_humidity', 'max_humidity', 'contract_number']
+                    'max_temperature', 'min_humidity', 'max_humidity', 'contract_number',
+                    'rack_number', 'rack_position']
     __timestamps__ = False
 
     @belongs_to
     def contract(self):
         return Contract
 
+    @belongs_to
+    def rack(self):
+        return Rack
+
 
 class Rack(db.Model):
-    __table__ = 'client'
+    __table__ = 'rack'
     __fillable__ = ['space_id', 'capacity', 'height', 'width', 'length', 'max_weight']
     __timestamps__ = False
     __primary_key__ = 'number'
@@ -49,12 +54,16 @@ class Rack(db.Model):
     def space(self):
         return Space
 
+    @has_many('rack_number')
+    def products(self):
+        return Product
+
 
 class Space(db.Model):
-    __table__ = 'client'
+    __table__ = 'space'
     __fillable__ = ['name', 'useful_volume', 'temperature', 'humidity']
     __timestamps__ = False
 
     @has_many
-    def rack(self):
+    def racks(self):
         return Rack
