@@ -23,7 +23,7 @@ class Contract(db.Model):
     def client(self):
         return Client
 
-    @has_many
+    @has_many('contract_number')
     def products(self):
         return Product
 
@@ -35,11 +35,11 @@ class Product(db.Model):
                     'rack_number', 'rack_position']
     __timestamps__ = False
 
-    @belongs_to
+    @belongs_to('contract_number', 'number')
     def contract(self):
         return Contract
 
-    @belongs_to
+    @belongs_to('rack_number', 'number')
     def rack(self):
         return Rack
 
