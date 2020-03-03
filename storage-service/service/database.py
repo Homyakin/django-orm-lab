@@ -24,6 +24,14 @@ def get_client_by_product_id(_id):
     return product[0].contract.client.to_dict()
 
 
+def get_all_clients():
+    clients = Client.all()
+    list_clients = []
+    for i in clients:
+        list_clients.append(i.to_dict())
+    return list_clients
+
+
 def get_products_by_client_id(_id):
     client = Client.where('id', '=', _id).get()
     if client.is_empty():

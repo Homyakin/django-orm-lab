@@ -18,6 +18,8 @@ def get_client():
         list_of_clients = database.get_clients_by_id(request.args.get('id'))
     elif request.args.get('product_id') is not None:
         list_of_clients = database.get_client_by_product_id(request.args.get('product_id'))
+    elif len(request.args) == 0:
+        list_of_clients = database.get_all_clients()
     return json.dumps(list_of_clients)
 
 
